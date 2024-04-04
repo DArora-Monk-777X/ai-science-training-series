@@ -1,0 +1,812 @@
+2024-03-31_DushyantHomework_Session#7- GROQ Output File
+GROQ
+ssh darora_mn@groq.ai.alcf.anl.gov
+ssh groq-r01-gn-03.ai.alcf.anl.gov
+Output Files:  Tried several times to run (even uninstall  groqflow and reinstall miniconda3 and reinstalled latest version). Everytime got "Module" or "OSError". Please see below.  
+ERROR: Could not install packages due to an OSError: [Errno 13] Permission denied: 'REQUESTED'
+ERROR: Could not install packages due to an OSError: [Errno 13] Permission denied: 'WHEEL'
+Consider using the `--user` option or check the permissions.
+(groqflow) darora_mn@groq-r01-gn-03:~/groqflow/demo_helpers$ popd
+~/groqflow
+(groqflow) darora_mn@groq-r01-gn-03:~/groqflow$ pip install soundfile
+Collecting soundfile
+  Using cached soundfile-0.12.1-py2.py3-none-manylinux_2_31_x86_64.whl.metadata (14 kB)
+Requirement already satisfied: cffi>=1.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from soundfile) (1.16.0)
+Requirement already satisfied: pycparser in /home/darora_mn/.local/lib/python3.10/site-packages (from cffi>=1.0->soundfile) (2.21)
+Using cached soundfile-0.12.1-py2.py3-none-manylinux_2_31_x86_64.whl (1.2 MB)
+Installing collected packages: soundfile
+Successfully installed soundfile-0.12.1
+(groqflow) darora_mn@groq-r01-gn-03:~/groqflow$ conda activate groqflow
+(groqflow) darora_mn@groq-r01-gn-03:~/groqflow$ qsub -I -l walltime=1:00:00
+Communication failure.
+qsub: cannot connect to server groq-r0 (errno=15031)
+(groqflow) darora_mn@groq-r01-gn-03:~/groqflow$ qsub -I -l walltime=1:00:00
+qsub: waiting for job 5115.groq-r01-controller.ai.alcf.anl.gov to start
+qsub: job 5115.groq-r01-controller.ai.alcf.anl.gov ready
+
+(base) darora_mn@groq-r01-gn-08:~$ ls
+BertLarge                            ai-science-training-series  slurm-29740.out  slurm-30188.out  venv_cerebras_pt
+Miniconda3-latest-Linux-x86_64.sh    graphcore                   slurm-29742.out  slurm-30203.out  venvs
+Miniconda3-latest-Linux-x86_64.sh.1  groqflow                    slurm-30185.out  ssh
+R_2.1.1                              miniconda3                  slurm-30187.out  tmp
+(base) darora_mn@groq-r01-gn-08:~$ cd groqflow/proof_points/natural_language_processing/bert
+(base) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ conda activate groqflow
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ pip install -r requirements.txt
+Requirement already satisfied: numpy>=1.21.6 in /opt/groq/runtime/site-packages (from -r requirements.txt (line 1)) (1.21.6)
+Collecting torch>=1.12.1 (from -r requirements.txt (line 2))
+  Using cached torch-2.2.2-cp310-cp310-manylinux1_x86_64.whl.metadata (26 kB)
+Requirement already satisfied: transformers>=4.20.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r requirements.txt (line 3)) (4.39.1)
+Requirement already satisfied: filelock in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (3.13.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in /opt/groq/runtime/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (4.9.0)
+Requirement already satisfied: sympy in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (1.12)
+Requirement already satisfied: networkx in /opt/groq/runtime/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (3.2.1)
+Collecting jinja2 (from torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached Jinja2-3.1.3-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: fsspec in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (2024.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.0.106)
+Collecting nvidia-nccl-cu12==2.19.3 (from torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached nvidia_nccl_cu12-2.19.3-py3-none-manylinux1_x86_64.whl.metadata (1.8 kB)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Collecting triton==2.2.0 (from torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached triton-2.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.4 kB)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/darora_mn/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=1.12.1->-r requirements.txt (line 2)) (12.4.99)
+Requirement already satisfied: huggingface-hub<1.0,>=0.19.3 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (0.21.4)
+Requirement already satisfied: packaging>=20.0 in /opt/groq/runtime/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (23.2)
+Requirement already satisfied: pyyaml>=5.1 in /opt/groq/runtime/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (5.4.1)
+Requirement already satisfied: regex!=2019.12.17 in /home/darora_mn/miniconda3/envs/groqflow/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (2023.12.25)
+Collecting requests (from transformers>=4.20.0->-r requirements.txt (line 3))
+  Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: tokenizers<0.19,>=0.14 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (0.15.2)
+Requirement already satisfied: safetensors>=0.4.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (0.4.2)
+Requirement already satisfied: tqdm>=4.27 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (4.66.2)
+Collecting MarkupSafe>=2.0 (from jinja2->torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.0 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in /home/darora_mn/.local/lib/python3.10/site-packages (from requests->transformers>=4.20.0->-r requirements.txt (line 3)) (2.1.0)
+Collecting idna<4,>=2.5 (from requests->transformers>=4.20.0->-r requirements.txt (line 3))
+  Using cached idna-3.6-py3-none-any.whl.metadata (9.9 kB)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /home/darora_mn/miniconda3/envs/groqflow/lib/python3.10/site-packages (from requests->transformers>=4.20.0->-r requirements.txt (line 3)) (2.2.1)
+Collecting certifi>=2017.4.17 (from requests->transformers>=4.20.0->-r requirements.txt (line 3))
+  Using cached certifi-2024.2.2-py3-none-any.whl.metadata (2.2 kB)
+Requirement already satisfied: mpmath>=0.19 in /home/darora_mn/.local/lib/python3.10/site-packages (from sympy->torch>=1.12.1->-r requirements.txt (line 2)) (1.3.0)
+Using cached torch-2.2.2-cp310-cp310-manylinux1_x86_64.whl (755.5 MB)
+Using cached nvidia_nccl_cu12-2.19.3-py3-none-manylinux1_x86_64.whl (166.0 MB)
+Using cached triton-2.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (167.9 MB)
+Using cached Jinja2-3.1.3-py3-none-any.whl (133 kB)
+Using cached requests-2.31.0-py3-none-any.whl (62 kB)
+Using cached certifi-2024.2.2-py3-none-any.whl (163 kB)
+Using cached idna-3.6-py3-none-any.whl (61 kB)
+Using cached MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Installing collected packages: triton, nvidia-nccl-cu12, MarkupSafe, idna, certifi, requests, jinja2, torch
+  Attempting uninstall: triton
+    Found existing installation: triton 2.1.0
+    Uninstalling triton-2.1.0:
+      Successfully uninstalled triton-2.1.0
+  Attempting uninstall: nvidia-nccl-cu12
+    Found existing installation: nvidia-nccl-cu12 2.18.1
+    Uninstalling nvidia-nccl-cu12-2.18.1:
+      Successfully uninstalled nvidia-nccl-cu12-2.18.1
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+hummingbird-ml 0.4.4 requires psutil, which is not installed.
+torchaudio 2.2.1 requires torch==2.2.1, but you have torch 2.2.2 which is incompatible.
+torchvision 0.17.1 requires torch==2.2.1, but you have torch 2.2.2 which is incompatible.
+Successfully installed MarkupSafe-2.1.5 certifi-2024.2.2 idna-3.6 jinja2-3.1.3 nvidia-nccl-cu12-2.19.3 requests-2.31.0 torch-2.2.2 triton-2.2.0
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ python bert_tiny.py
+Traceback (most recent call last):
+  File "/home/darora_mn/groqflow/proof_points/natural_language_processing/bert/bert_tiny.py", line 11, in <module>
+    from groqflow import groqit
+ModuleNotFoundError: No module named 'groqflow'
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$
+(base) darora_mn@groq-r01-gn-05:~$ conda activate groqflow
+(groqflow) darora_mn@groq-r01-gn-05:~$ cd ~/groqflow
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ if [ -d "groqflow.egg-info" ]; then rm -r groqflow.egg-info; fi
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ pip install --upgrade pip
+Requirement already satisfied: pip in /home/darora_mn/.local/lib/python3.10/site-packages (24.0)
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ pip list --format=freeze > frozen.txt
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ pip install -r frozen.txt -e .
+Obtaining file:///home/darora_mn/groqflow
+  Installing build dependencies ... done
+  Checking if build backend supports build_editable ... done
+  Getting requirements to build editable ... done
+  Installing backend dependencies ... done
+  Preparing editable metadata (pyproject.toml) ... done
+Requirement already satisfied: aiohttp==3.9.3 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 1)) (3.9.3)
+Requirement already satisfied: aiosignal==1.3.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 2)) (1.3.1)
+Requirement already satisfied: ansicolors==1.1.8 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 3)) (1.1.8)
+Requirement already satisfied: async-timeout==4.0.3 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 4)) (4.0.3)
+Requirement already satisfied: bcrypt==4.1.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 5)) (4.1.2)
+Requirement already satisfied: bitstring==3.1.9 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 6)) (3.1.9)
+Requirement already satisfied: cffi==1.16.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 7)) (1.16.0)
+Requirement already satisfied: charset-normalizer==2.1.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 8)) (2.1.0)
+Requirement already satisfied: click==8.0.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 9)) (8.0.3)
+Requirement already satisfied: coloredlogs==15.0.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 10)) (15.0.1)
+Requirement already satisfied: contourpy==1.2.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 11)) (1.2.0)
+Requirement already satisfied: crcmod==1.7 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 12)) (1.7)
+Requirement already satisfied: cycler==0.12.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 13)) (0.12.1)
+Requirement already satisfied: datasets==2.18.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 14)) (2.18.0)
+Requirement already satisfied: Deprecated==1.2.13 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 15)) (1.2.13)
+Requirement already satisfied: dill==0.3.8 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 16)) (0.3.8)
+Requirement already satisfied: fasteners==0.19 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 17)) (0.19)
+Requirement already satisfied: filelock==3.13.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 18)) (3.13.1)
+Requirement already satisfied: flatbuffers==24.3.7 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 19)) (24.3.7)
+Requirement already satisfied: fonttools==4.49.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 20)) (4.49.0)
+Requirement already satisfied: frozenlist==1.4.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 21)) (1.4.1)
+Requirement already satisfied: fsspec==2024.2.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 22)) (2024.2.0)
+Requirement already satisfied: groq-runtime==0.30 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 23)) (0.30)
+Requirement already satisfied: groq-systems==1.13.8 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 24)) (1.13.8)
+Requirement already satisfied: grpcio==1.53.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 25)) (1.53.2)
+Requirement already satisfied: grpcio-tools==1.42.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 26)) (1.42.0)
+Requirement already satisfied: host-daemon==0.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 27)) (0.1)
+Requirement already satisfied: huggingface-hub==0.21.4 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 28)) (0.21.4)
+Requirement already satisfied: humanfriendly==10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 29)) (10.0)
+Requirement already satisfied: hummingbird-ml==0.4.4 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 30)) (0.4.4)
+Requirement already satisfied: imageio==2.21.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 31)) (2.21.0)
+Requirement already satisfied: invoke==2.2.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 32)) (2.2.0)
+Requirement already satisfied: joblib==1.3.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 33)) (1.3.2)
+Requirement already satisfied: kiwisolver==1.4.5 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 34)) (1.4.5)
+Requirement already satisfied: lightgbm==3.3.5 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 35)) (3.3.5)
+Requirement already satisfied: matplotlib==3.8.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 36)) (3.8.3)
+Requirement already satisfied: mlagility==3.2.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 37)) (3.2.0)
+Requirement already satisfied: mpi4py==3.1.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 38)) (3.1.3)
+Requirement already satisfied: mpmath==1.3.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 39)) (1.3.0)
+Requirement already satisfied: multidict==6.0.5 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 40)) (6.0.5)
+Requirement already satisfied: multiprocess==0.70.16 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 41)) (0.70.16)
+Requirement already satisfied: networkx==3.2.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 42)) (3.2.1)
+Requirement already satisfied: numa==1.4.6 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 43)) (1.4.6)
+Requirement already satisfied: numpy==1.21.6 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 44)) (1.21.6)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 45)) (12.1.3.1)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 46)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 47)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 48)) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 49)) (8.9.2.26)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 50)) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 51)) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 52)) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 53)) (12.1.0.106)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.4.99 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 54)) (12.4.99)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 55)) (12.1.105)
+Requirement already satisfied: onnx==1.15.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 56)) (1.15.0)
+Requirement already satisfied: onnxconverter-common==1.13.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 57)) (1.13.0)
+Requirement already satisfied: onnxmltools==1.10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 58)) (1.10.0)
+Requirement already satisfied: onnxruntime==1.14.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 59)) (1.14.1)
+Requirement already satisfied: ordered-set==4.0.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 60)) (4.0.2)
+Requirement already satisfied: packaging==23.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 61)) (23.2)
+Requirement already satisfied: pandas==2.2.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 62)) (2.2.1)
+Requirement already satisfied: paramiko==2.11.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 63)) (2.11.0)
+Requirement already satisfied: parse==1.19.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 64)) (1.19.0)
+Requirement already satisfied: parsimonious==0.8.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 65)) (0.8.1)
+Requirement already satisfied: path==16.10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 66)) (16.10.0)
+Requirement already satisfied: pillow==10.2.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 67)) (10.2.0)
+Requirement already satisfied: pip==24.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 68)) (24.0)
+Requirement already satisfied: prettytable==3.10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 69)) (3.10.0)
+Requirement already satisfied: protobuf==3.20.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 70)) (3.20.3)
+Requirement already satisfied: pyarrow==15.0.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 71)) (15.0.2)
+Requirement already satisfied: pyarrow-hotfix==0.6 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 72)) (0.6)
+Requirement already satisfied: pycparser==2.21 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 73)) (2.21)
+Requirement already satisfied: pycryptodome==3.11.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 74)) (3.11.0)
+Requirement already satisfied: pyftdi==0.53.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 75)) (0.53.3)
+Requirement already satisfied: PyNaCl==1.5.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 76)) (1.5.0)
+Requirement already satisfied: pyparsing==3.1.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 77)) (3.1.1)
+Requirement already satisfied: pyserial==3.5 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 78)) (3.5)
+Requirement already satisfied: python-dateutil==2.8.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 79)) (2.8.2)
+Requirement already satisfied: pyusb==1.2.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 80)) (1.2.1)
+Requirement already satisfied: PyWavelets==1.4.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 81)) (1.4.1)
+Requirement already satisfied: PyYAML==5.4.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 82)) (5.4.1)
+Requirement already satisfied: safetensors==0.4.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 83)) (0.4.2)
+Requirement already satisfied: scikit-image==0.18.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 84)) (0.18.3)
+Requirement already satisfied: scikit-learn==1.1.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 85)) (1.1.1)
+Requirement already satisfied: scipy==1.8.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 86)) (1.8.0)
+Requirement already satisfied: setuptools==57.2.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 87)) (57.2.0)
+Requirement already satisfied: six==1.16.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 88)) (1.16.0)
+Requirement already satisfied: skl2onnx==1.16.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 89)) (1.16.0)
+Requirement already satisfied: sympy==1.12 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 90)) (1.12)
+Requirement already satisfied: threadpoolctl==3.4.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 91)) (3.4.0)
+Requirement already satisfied: tifffile==2024.2.12 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 92)) (2024.2.12)
+Requirement already satisfied: tokenizers==0.15.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 93)) (0.15.2)
+Requirement already satisfied: torchaudio==2.2.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 94)) (2.2.1)
+Requirement already satisfied: torchvision==0.17.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 95)) (0.17.1)
+Requirement already satisfied: tqdm==4.66.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 96)) (4.66.2)
+Requirement already satisfied: transformers==4.39.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 97)) (4.39.1)
+Requirement already satisfied: typeguard==4.0.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 98)) (4.0.0)
+Requirement already satisfied: typing_extensions==4.9.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 99)) (4.9.0)
+Requirement already satisfied: tzdata==2024.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 100)) (2024.1)
+Requirement already satisfied: wcwidth==0.2.13 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 101)) (0.2.13)
+Requirement already satisfied: wget==3.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 102)) (3.2)
+Requirement already satisfied: wheel==0.36.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 103)) (0.36.2)
+Requirement already satisfied: wrapt==1.16.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 104)) (1.16.0)
+Requirement already satisfied: xgboost==1.6.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 105)) (1.6.1)
+Requirement already satisfied: xxhash==3.4.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 106)) (3.4.1)
+Requirement already satisfied: yarl==1.9.4 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 107)) (1.9.4)
+Collecting attrs>=17.3.0 (from aiohttp==3.9.3->-r frozen.txt (line 1))
+  Using cached attrs-23.2.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting requests>=2.19.0 (from datasets==2.18.0->-r frozen.txt (line 14))
+  Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting torch>=1.4 (from hummingbird-ml==0.4.4->-r frozen.txt (line 30))
+  Using cached torch-2.2.2-cp310-cp310-manylinux1_x86_64.whl.metadata (26 kB)
+Collecting psutil (from hummingbird-ml==0.4.4->-r frozen.txt (line 30))
+  Using cached psutil-5.9.8-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (21 kB)
+INFO: pip is looking at multiple versions of pandas to determine which version is compatible with other requirements. This could take a while.
+Collecting onnxruntime==1.14.1 (from -r frozen.txt (line 59))
+  Using cached onnxruntime-1.14.1-cp310-cp310-manylinux_2_27_x86_64.whl.metadata (3.9 kB)
+Collecting onnxmltools==1.10.0 (from -r frozen.txt (line 58))
+  Using cached onnxmltools-1.10.0-py2.py3-none-any.whl.metadata (8.3 kB)
+Collecting onnxconverter-common==1.13.0 (from -r frozen.txt (line 57))
+  Using cached onnxconverter_common-1.13.0-py2.py3-none-any.whl.metadata (2.6 kB)
+INFO: pip is still looking at multiple versions of pandas to determine which version is compatible with other requirements. This could take a while.
+Collecting onnx==1.15.0 (from -r frozen.txt (line 56))
+  Using cached onnx-1.15.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (15 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+Collecting mlagility==3.2.0 (from -r frozen.txt (line 37))
+  Using cached mlagility-3.2.0-py3-none-any.whl.metadata (6.2 kB)
+Collecting matplotlib==3.8.3 (from -r frozen.txt (line 36))
+  Using cached matplotlib-3.8.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+Collecting lightgbm==3.3.5 (from -r frozen.txt (line 35))
+  Using cached lightgbm-3.3.5-py3-none-manylinux1_x86_64.whl.metadata (15 kB)
+Collecting imageio==2.21.0 (from -r frozen.txt (line 31))
+  Using cached imageio-2.21.0-py3-none-any.whl.metadata (4.9 kB)
+Collecting hummingbird-ml==0.4.4 (from -r frozen.txt (line 30))
+  Using cached hummingbird_ml-0.4.4-py2.py3-none-any.whl.metadata (10 kB)
+Collecting datasets==2.18.0 (from -r frozen.txt (line 14))
+  Using cached datasets-2.18.0-py3-none-any.whl.metadata (20 kB)
+Collecting contourpy==1.2.0 (from -r frozen.txt (line 11))
+  Using cached contourpy-1.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+ERROR: Cannot install -r frozen.txt (line 11), -r frozen.txt (line 14), -r frozen.txt (line 30), -r frozen.txt (line 31), -r frozen.txt (line 35), -r frozen.txt (line 36), -r frozen.txt (line 56), -r frozen.txt (line 57), -r frozen.txt (line 58), -r frozen.txt (line 59), groq-runtime==0.30, numpy==1.21.6 and pandas==2.2.1 because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    The user requested numpy==1.21.6
+    contourpy 1.2.0 depends on numpy<2.0 and >=1.20
+    datasets 2.18.0 depends on numpy>=1.17
+    groq-runtime 0.30 depends on numpy
+    hummingbird-ml 0.4.4 depends on numpy>=1.15
+    imageio 2.21.0 depends on numpy
+    lightgbm 3.3.5 depends on numpy
+    matplotlib 3.8.3 depends on numpy<2 and >=1.21
+    onnx 1.15.0 depends on numpy
+    onnxconverter-common 1.13.0 depends on numpy
+    onnxmltools 1.10.0 depends on numpy
+    onnxruntime 1.14.1 depends on numpy>=1.21.6
+    pandas 2.2.1 depends on numpy<2 and >=1.22.4; python_version < "3.11"
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip attempt to solve the dependency conflict
+
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ pip install -r frozen.txt -e .
+Obtaining file:///home/darora_mn/groqflow
+  Installing build dependencies ... done
+  Checking if build backend supports build_editable ... done
+  Getting requirements to build editable ... done
+  Installing backend dependencies ... done
+  Preparing editable metadata (pyproject.toml) ... done
+Requirement already satisfied: aiohttp==3.9.3 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 1)) (3.9.3)
+Requirement already satisfied: aiosignal==1.3.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 2)) (1.3.1)
+Requirement already satisfied: ansicolors==1.1.8 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 3)) (1.1.8)
+Requirement already satisfied: async-timeout==4.0.3 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 4)) (4.0.3)
+Requirement already satisfied: bcrypt==4.1.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 5)) (4.1.2)
+Requirement already satisfied: bitstring==3.1.9 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 6)) (3.1.9)
+Requirement already satisfied: cffi==1.16.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 7)) (1.16.0)
+Requirement already satisfied: charset-normalizer==2.1.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 8)) (2.1.0)
+Requirement already satisfied: click==8.0.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 9)) (8.0.3)
+Requirement already satisfied: coloredlogs==15.0.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 10)) (15.0.1)
+Requirement already satisfied: contourpy==1.2.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 11)) (1.2.0)
+Requirement already satisfied: crcmod==1.7 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 12)) (1.7)
+Requirement already satisfied: cycler==0.12.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 13)) (0.12.1)
+Requirement already satisfied: datasets==2.18.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 14)) (2.18.0)
+Requirement already satisfied: Deprecated==1.2.13 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 15)) (1.2.13)
+Requirement already satisfied: dill==0.3.8 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 16)) (0.3.8)
+Requirement already satisfied: fasteners==0.19 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 17)) (0.19)
+Requirement already satisfied: filelock==3.13.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 18)) (3.13.1)
+Requirement already satisfied: flatbuffers==24.3.7 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 19)) (24.3.7)
+Requirement already satisfied: fonttools==4.49.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 20)) (4.49.0)
+Requirement already satisfied: frozenlist==1.4.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 21)) (1.4.1)
+Requirement already satisfied: fsspec==2024.2.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 22)) (2024.2.0)
+Requirement already satisfied: groq-runtime==0.30 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 23)) (0.30)
+Requirement already satisfied: groq-systems==1.13.8 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 24)) (1.13.8)
+Requirement already satisfied: grpcio==1.53.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 25)) (1.53.2)
+Requirement already satisfied: grpcio-tools==1.42.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 26)) (1.42.0)
+Requirement already satisfied: host-daemon==0.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 27)) (0.1)
+Requirement already satisfied: huggingface-hub==0.21.4 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 28)) (0.21.4)
+Requirement already satisfied: humanfriendly==10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 29)) (10.0)
+Requirement already satisfied: hummingbird-ml==0.4.4 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 30)) (0.4.4)
+Requirement already satisfied: imageio==2.21.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 31)) (2.21.0)
+Requirement already satisfied: invoke==2.2.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 32)) (2.2.0)
+Requirement already satisfied: joblib==1.3.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 33)) (1.3.2)
+Requirement already satisfied: kiwisolver==1.4.5 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 34)) (1.4.5)
+Requirement already satisfied: lightgbm==3.3.5 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 35)) (3.3.5)
+Requirement already satisfied: matplotlib==3.8.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 36)) (3.8.3)
+Requirement already satisfied: mlagility==3.2.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 37)) (3.2.0)
+Requirement already satisfied: mpi4py==3.1.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 38)) (3.1.3)
+Requirement already satisfied: mpmath==1.3.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 39)) (1.3.0)
+Requirement already satisfied: multidict==6.0.5 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 40)) (6.0.5)
+Requirement already satisfied: multiprocess==0.70.16 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 41)) (0.70.16)
+Requirement already satisfied: networkx==3.2.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 42)) (3.2.1)
+Requirement already satisfied: numa==1.4.6 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 43)) (1.4.6)
+Requirement already satisfied: numpy==1.21.6 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 44)) (1.21.6)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 45)) (12.1.3.1)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 46)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 47)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 48)) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 49)) (8.9.2.26)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 50)) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 51)) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 52)) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 53)) (12.1.0.106)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.4.99 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 54)) (12.4.99)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 55)) (12.1.105)
+Requirement already satisfied: onnx==1.15.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 56)) (1.15.0)
+Requirement already satisfied: onnxconverter-common==1.13.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 57)) (1.13.0)
+Requirement already satisfied: onnxmltools==1.10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 58)) (1.10.0)
+Requirement already satisfied: onnxruntime==1.14.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 59)) (1.14.1)
+Requirement already satisfied: ordered-set==4.0.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 60)) (4.0.2)
+Requirement already satisfied: packaging==23.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 61)) (23.2)
+Requirement already satisfied: pandas==2.2.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 62)) (2.2.1)
+Requirement already satisfied: paramiko==2.11.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 63)) (2.11.0)
+Requirement already satisfied: parse==1.19.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 64)) (1.19.0)
+Requirement already satisfied: parsimonious==0.8.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 65)) (0.8.1)
+Requirement already satisfied: path==16.10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 66)) (16.10.0)
+Requirement already satisfied: pillow==10.2.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 67)) (10.2.0)
+Requirement already satisfied: pip==24.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 68)) (24.0)
+Requirement already satisfied: prettytable==3.10.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 69)) (3.10.0)
+Requirement already satisfied: protobuf==3.20.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 70)) (3.20.3)
+Requirement already satisfied: pyarrow==15.0.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 71)) (15.0.2)
+Requirement already satisfied: pyarrow-hotfix==0.6 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 72)) (0.6)
+Requirement already satisfied: pycparser==2.21 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 73)) (2.21)
+Requirement already satisfied: pycryptodome==3.11.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 74)) (3.11.0)
+Requirement already satisfied: pyftdi==0.53.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 75)) (0.53.3)
+Requirement already satisfied: PyNaCl==1.5.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 76)) (1.5.0)
+Requirement already satisfied: pyparsing==3.1.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 77)) (3.1.1)
+Requirement already satisfied: pyserial==3.5 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 78)) (3.5)
+Requirement already satisfied: python-dateutil==2.8.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 79)) (2.8.2)
+Requirement already satisfied: pyusb==1.2.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 80)) (1.2.1)
+Requirement already satisfied: PyWavelets==1.4.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 81)) (1.4.1)
+Requirement already satisfied: PyYAML==5.4.1 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 82)) (5.4.1)
+Requirement already satisfied: safetensors==0.4.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 83)) (0.4.2)
+Requirement already satisfied: scikit-image==0.18.3 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 84)) (0.18.3)
+Requirement already satisfied: scikit-learn==1.1.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 85)) (1.1.1)
+Requirement already satisfied: scipy==1.8.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 86)) (1.8.0)
+Requirement already satisfied: setuptools==57.2.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 87)) (57.2.0)
+Requirement already satisfied: six==1.16.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 88)) (1.16.0)
+Requirement already satisfied: skl2onnx==1.16.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 89)) (1.16.0)
+Requirement already satisfied: sympy==1.12 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 90)) (1.12)
+Requirement already satisfied: threadpoolctl==3.4.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 91)) (3.4.0)
+Requirement already satisfied: tifffile==2024.2.12 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 92)) (2024.2.12)
+Requirement already satisfied: tokenizers==0.15.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 93)) (0.15.2)
+Requirement already satisfied: torchaudio==2.2.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 94)) (2.2.1)
+Requirement already satisfied: torchvision==0.17.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 95)) (0.17.1)
+Requirement already satisfied: tqdm==4.66.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 96)) (4.66.2)
+Requirement already satisfied: transformers==4.39.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 97)) (4.39.1)
+Requirement already satisfied: typeguard==4.0.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 98)) (4.0.0)
+Requirement already satisfied: typing_extensions==4.9.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 99)) (4.9.0)
+Requirement already satisfied: tzdata==2024.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 100)) (2024.1)
+Requirement already satisfied: wcwidth==0.2.13 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 101)) (0.2.13)
+Requirement already satisfied: wget==3.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 102)) (3.2)
+Requirement already satisfied: wheel==0.36.2 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 103)) (0.36.2)
+Requirement already satisfied: wrapt==1.16.0 in /opt/groq/runtime/site-packages (from -r frozen.txt (line 104)) (1.16.0)
+Requirement already satisfied: xgboost==1.6.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 105)) (1.6.1)
+Requirement already satisfied: xxhash==3.4.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 106)) (3.4.1)
+Requirement already satisfied: yarl==1.9.4 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r frozen.txt (line 107)) (1.9.4)
+Collecting attrs>=17.3.0 (from aiohttp==3.9.3->-r frozen.txt (line 1))
+  Using cached attrs-23.2.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting requests>=2.19.0 (from datasets==2.18.0->-r frozen.txt (line 14))
+  Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting torch>=1.4 (from hummingbird-ml==0.4.4->-r frozen.txt (line 30))
+  Using cached torch-2.2.2-cp310-cp310-manylinux1_x86_64.whl.metadata (26 kB)
+Collecting psutil (from hummingbird-ml==0.4.4->-r frozen.txt (line 30))
+  Using cached psutil-5.9.8-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (21 kB)
+INFO: pip is looking at multiple versions of pandas to determine which version is compatible with other requirements. This could take a while.
+Collecting onnxruntime==1.14.1 (from -r frozen.txt (line 59))
+  Using cached onnxruntime-1.14.1-cp310-cp310-manylinux_2_27_x86_64.whl.metadata (3.9 kB)
+Collecting onnxmltools==1.10.0 (from -r frozen.txt (line 58))
+  Using cached onnxmltools-1.10.0-py2.py3-none-any.whl.metadata (8.3 kB)
+Collecting onnxconverter-common==1.13.0 (from -r frozen.txt (line 57))
+  Using cached onnxconverter_common-1.13.0-py2.py3-none-any.whl.metadata (2.6 kB)
+INFO: pip is still looking at multiple versions of pandas to determine which version is compatible with other requirements. This could take a while.
+Collecting onnx==1.15.0 (from -r frozen.txt (line 56))
+  Using cached onnx-1.15.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (15 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+Collecting mlagility==3.2.0 (from -r frozen.txt (line 37))
+  Using cached mlagility-3.2.0-py3-none-any.whl.metadata (6.2 kB)
+Collecting matplotlib==3.8.3 (from -r frozen.txt (line 36))
+  Using cached matplotlib-3.8.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+Collecting lightgbm==3.3.5 (from -r frozen.txt (line 35))
+  Using cached lightgbm-3.3.5-py3-none-manylinux1_x86_64.whl.metadata (15 kB)
+Collecting imageio==2.21.0 (from -r frozen.txt (line 31))
+  Using cached imageio-2.21.0-py3-none-any.whl.metadata (4.9 kB)
+Collecting hummingbird-ml==0.4.4 (from -r frozen.txt (line 30))
+  Using cached hummingbird_ml-0.4.4-py2.py3-none-any.whl.metadata (10 kB)
+Collecting datasets==2.18.0 (from -r frozen.txt (line 14))
+  Using cached datasets-2.18.0-py3-none-any.whl.metadata (20 kB)
+Collecting contourpy==1.2.0 (from -r frozen.txt (line 11))
+  Using cached contourpy-1.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+ERROR: Cannot install -r frozen.txt (line 11), -r frozen.txt (line 14), -r frozen.txt (line 30), -r frozen.txt (line 31), -r frozen.txt (line 35), -r frozen.txt (line 36), -r frozen.txt (line 56), -r frozen.txt (line 57), -r frozen.txt (line 58), -r frozen.txt (line 59), groq-runtime==0.30, numpy==1.21.6 and pandas==2.2.1 because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    The user requested numpy==1.21.6
+    contourpy 1.2.0 depends on numpy<2.0 and >=1.20
+    datasets 2.18.0 depends on numpy>=1.17
+    groq-runtime 0.30 depends on numpy
+    hummingbird-ml 0.4.4 depends on numpy>=1.15
+    imageio 2.21.0 depends on numpy
+    lightgbm 3.3.5 depends on numpy
+    matplotlib 3.8.3 depends on numpy<2 and >=1.21
+    onnx 1.15.0 depends on numpy
+    onnxconverter-common 1.13.0 depends on numpy
+    onnxmltools 1.10.0 depends on numpy
+    onnxruntime 1.14.1 depends on numpy>=1.21.6
+    pandas 2.2.1 depends on numpy<2 and >=1.22.4; python_version < "3.11"
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip attempt to solve the dependency conflict
+
+ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ pushd .
+~/groqflow ~/groqflow
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ cd demo_helpers
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow/demo_helpers$ if [ -d "groqflow_demo_helpers.egg-info" ]; then rm -r groqflow_demo_helpers.egg-info; fi
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow/demo_helpers$ pip install -e .
+Obtaining file:///home/darora_mn/groqflow/demo_helpers
+  Preparing metadata (setup.py) ... done
+Collecting charset-normalizer==3.3.2 (from groqflow-demo-helpers==0.2.0)
+  Using cached charset_normalizer-3.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (33 kB)
+Requirement already satisfied: transformers>=4.20.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from groqflow-demo-helpers==0.2.0) (4.39.1)
+Requirement already satisfied: datasets>=2.3.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from groqflow-demo-helpers==0.2.0) (2.18.0)
+Requirement already satisfied: prettytable>=3.3.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from groqflow-demo-helpers==0.2.0) (3.10.0)
+Requirement already satisfied: wget>=3.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from groqflow-demo-helpers==0.2.0) (3.2)
+Requirement already satisfied: setuptools==57.2.0 in /opt/groq/runtime/site-packages (from groqflow-demo-helpers==0.2.0) (57.2.0)
+Collecting torchvision==0.16.0 (from groqflow-demo-helpers==0.2.0)
+  Using cached torchvision-0.16.0-cp310-cp310-manylinux1_x86_64.whl.metadata (6.6 kB)
+Collecting torchaudio==2.1.0 (from groqflow-demo-helpers==0.2.0)
+  Using cached torchaudio-2.1.0-cp310-cp310-manylinux1_x86_64.whl.metadata (5.7 kB)
+Requirement already satisfied: path>=16.4.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from groqflow-demo-helpers==0.2.0) (16.10.0)
+Collecting torch==2.1.0 (from torchaudio==2.1.0->groqflow-demo-helpers==0.2.0)
+  Using cached torch-2.1.0-cp310-cp310-manylinux1_x86_64.whl.metadata (25 kB)
+Requirement already satisfied: numpy in /opt/groq/runtime/site-packages (from torchvision==0.16.0->groqflow-demo-helpers==0.2.0) (1.21.6)
+Collecting requests (from torchvision==0.16.0->groqflow-demo-helpers==0.2.0)
+  Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /opt/groq/runtime/site-packages (from torchvision==0.16.0->groqflow-demo-helpers==0.2.0) (10.2.0)
+Requirement already satisfied: filelock in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (3.13.1)
+Requirement already satisfied: typing-extensions in /opt/groq/runtime/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (4.9.0)
+Requirement already satisfied: sympy in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (1.12)
+Requirement already satisfied: networkx in /opt/groq/runtime/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (3.2.1)
+Collecting jinja2 (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0)
+  Using cached Jinja2-3.1.3-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: fsspec in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (2024.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (12.1.0.106)
+Collecting nvidia-nccl-cu12==2.18.1 (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0)
+  Using cached nvidia_nccl_cu12-2.18.1-py3-none-manylinux1_x86_64.whl.metadata (1.8 kB)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (12.1.105)
+Collecting triton==2.1.0 (from torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0)
+  Using cached triton-2.1.0-0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.3 kB)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/darora_mn/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (12.4.99)
+Requirement already satisfied: pyarrow>=12.0.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (15.0.2)
+Requirement already satisfied: pyarrow-hotfix in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (0.6)
+Requirement already satisfied: dill<0.3.9,>=0.3.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (0.3.8)
+Requirement already satisfied: pandas in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (2.2.1)
+Requirement already satisfied: tqdm>=4.62.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (4.66.2)
+Requirement already satisfied: xxhash in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (3.4.1)
+Requirement already satisfied: multiprocess in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (0.70.16)
+Requirement already satisfied: aiohttp in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (3.9.3)
+Requirement already satisfied: huggingface-hub>=0.19.4 in /home/darora_mn/.local/lib/python3.10/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (0.21.4)
+Requirement already satisfied: packaging in /opt/groq/runtime/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (23.2)
+Requirement already satisfied: pyyaml>=5.1 in /opt/groq/runtime/site-packages (from datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (5.4.1)
+Requirement already satisfied: wcwidth in /home/darora_mn/.local/lib/python3.10/site-packages (from prettytable>=3.3.0->groqflow-demo-helpers==0.2.0) (0.2.13)
+Collecting regex!=2019.12.17 (from transformers>=4.20.0->groqflow-demo-helpers==0.2.0)
+  Using cached regex-2023.12.25-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (40 kB)
+Requirement already satisfied: tokenizers<0.19,>=0.14 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->groqflow-demo-helpers==0.2.0) (0.15.2)
+Requirement already satisfied: safetensors>=0.4.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->groqflow-demo-helpers==0.2.0) (0.4.2)
+Requirement already satisfied: aiosignal>=1.1.2 in /home/darora_mn/.local/lib/python3.10/site-packages (from aiohttp->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (1.3.1)
+Collecting attrs>=17.3.0 (from aiohttp->datasets>=2.3.2->groqflow-demo-helpers==0.2.0)
+  Using cached attrs-23.2.0-py3-none-any.whl.metadata (9.5 kB)
+Requirement already satisfied: frozenlist>=1.1.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from aiohttp->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in /home/darora_mn/.local/lib/python3.10/site-packages (from aiohttp->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (6.0.5)
+Requirement already satisfied: yarl<2.0,>=1.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from aiohttp->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (1.9.4)
+Requirement already satisfied: async-timeout<5.0,>=4.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from aiohttp->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (4.0.3)
+Collecting idna<4,>=2.5 (from requests->torchvision==0.16.0->groqflow-demo-helpers==0.2.0)
+  Using cached idna-3.6-py3-none-any.whl.metadata (9.9 kB)
+Collecting urllib3<3,>=1.21.1 (from requests->torchvision==0.16.0->groqflow-demo-helpers==0.2.0)
+  Using cached urllib3-2.2.1-py3-none-any.whl.metadata (6.4 kB)
+Collecting certifi>=2017.4.17 (from requests->torchvision==0.16.0->groqflow-demo-helpers==0.2.0)
+  Using cached certifi-2024.2.2-py3-none-any.whl.metadata (2.2 kB)
+Collecting numpy (from torchvision==0.16.0->groqflow-demo-helpers==0.2.0)
+  Using cached numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+Requirement already satisfied: python-dateutil>=2.8.2 in /opt/groq/runtime/site-packages (from pandas->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (2.8.2)
+Collecting pytz>=2020.1 (from pandas->datasets>=2.3.2->groqflow-demo-helpers==0.2.0)
+  Using cached pytz-2024.1-py2.py3-none-any.whl.metadata (22 kB)
+Requirement already satisfied: tzdata>=2022.7 in /home/darora_mn/.local/lib/python3.10/site-packages (from pandas->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (2024.1)
+Requirement already satisfied: six>=1.5 in /opt/groq/runtime/site-packages (from python-dateutil>=2.8.2->pandas->datasets>=2.3.2->groqflow-demo-helpers==0.2.0) (1.16.0)
+Collecting MarkupSafe>=2.0 (from jinja2->torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0)
+  Using cached MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.0 kB)
+Requirement already satisfied: mpmath>=0.19 in /home/darora_mn/.local/lib/python3.10/site-packages (from sympy->torch==2.1.0->torchaudio==2.1.0->groqflow-demo-helpers==0.2.0) (1.3.0)
+Using cached charset_normalizer-3.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (142 kB)
+Using cached torchaudio-2.1.0-cp310-cp310-manylinux1_x86_64.whl (3.3 MB)
+Using cached torchvision-0.16.0-cp310-cp310-manylinux1_x86_64.whl (6.9 MB)
+Using cached torch-2.1.0-cp310-cp310-manylinux1_x86_64.whl (670.2 MB)
+Using cached nvidia_nccl_cu12-2.18.1-py3-none-manylinux1_x86_64.whl (209.8 MB)
+Using cached triton-2.1.0-0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (89.2 MB)
+Using cached regex-2023.12.25-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (773 kB)
+Using cached requests-2.31.0-py3-none-any.whl (62 kB)
+Using cached numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.2 MB)
+Using cached attrs-23.2.0-py3-none-any.whl (60 kB)
+Using cached certifi-2024.2.2-py3-none-any.whl (163 kB)
+Using cached idna-3.6-py3-none-any.whl (61 kB)
+Using cached pytz-2024.1-py2.py3-none-any.whl (505 kB)
+Using cached urllib3-2.2.1-py3-none-any.whl (121 kB)
+Using cached Jinja2-3.1.3-py3-none-any.whl (133 kB)
+Using cached MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Installing collected packages: pytz, urllib3, triton, regex, nvidia-nccl-cu12, numpy, MarkupSafe, idna, charset-normalizer, certifi, attrs, requests, jinja2, torch, torchvision, torchaudio, groqflow-demo-helpers
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.21.6
+    Uninstalling numpy-1.21.6:
+ERROR: Could not install packages due to an OSError: [Errno 13] Permission denied: 'INSTALLER'
+Consider using the `--user` option or check the permissions.
+
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow/demo_helpers$ popd
+~/groqflow
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ pip install soundfile
+Collecting soundfile
+  Using cached soundfile-0.12.1-py2.py3-none-manylinux_2_31_x86_64.whl.metadata (14 kB)
+Requirement already satisfied: cffi>=1.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from soundfile) (1.16.0)
+Requirement already satisfied: pycparser in /home/darora_mn/.local/lib/python3.10/site-packages (from cffi>=1.0->soundfile) (2.21)
+Using cached soundfile-0.12.1-py2.py3-none-manylinux_2_31_x86_64.whl (1.2 MB)
+Installing collected packages: soundfile
+Successfully installed soundfile-0.12.1
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ conda activate groqflow
+(groqflow) darora_mn@groq-r01-gn-05:~/groqflow$ qsub -I -l walltime=1:00:00
+qsub: waiting for job 5116.groq-r01-controller.ai.alcf.anl.gov to start
+qsub: job 5116.groq-r01-controller.ai.alcf.anl.gov ready
+
+(base) darora_mn@groq-r01-gn-08:~$ cd groqflow/proof_points/natural_language_processing/bert/
+(base) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ conda activate groqflow
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ pip install -r requirements.txt
+Requirement already satisfied: numpy>=1.21.6 in /opt/groq/runtime/site-packages (from -r requirements.txt (line 1)) (1.21.6)
+Collecting torch>=1.12.1 (from -r requirements.txt (line 2))
+  Using cached torch-2.2.2-cp310-cp310-manylinux1_x86_64.whl.metadata (26 kB)
+Requirement already satisfied: transformers>=4.20.0 in /home/darora_mn/.local/lib/python3.10/site-packages (from -r requirements.txt (line 3)) (4.39.1)
+Requirement already satisfied: filelock in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (3.13.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in /opt/groq/runtime/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (4.9.0)
+Requirement already satisfied: sympy in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (1.12)
+Requirement already satisfied: networkx in /opt/groq/runtime/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (3.2.1)
+Collecting jinja2 (from torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached Jinja2-3.1.3-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: fsspec in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (2024.2.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.0.106)
+Collecting nvidia-nccl-cu12==2.19.3 (from torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached nvidia_nccl_cu12-2.19.3-py3-none-manylinux1_x86_64.whl.metadata (1.8 kB)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/darora_mn/.local/lib/python3.10/site-packages (from torch>=1.12.1->-r requirements.txt (line 2)) (12.1.105)
+Collecting triton==2.2.0 (from torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached triton-2.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.4 kB)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/darora_mn/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=1.12.1->-r requirements.txt (line 2)) (12.4.99)
+Requirement already satisfied: huggingface-hub<1.0,>=0.19.3 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (0.21.4)
+Requirement already satisfied: packaging>=20.0 in /opt/groq/runtime/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (23.2)
+Requirement already satisfied: pyyaml>=5.1 in /opt/groq/runtime/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (5.4.1)
+Requirement already satisfied: regex!=2019.12.17 in /home/darora_mn/miniconda3/envs/groqflow/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (2023.12.25)
+Collecting requests (from transformers>=4.20.0->-r requirements.txt (line 3))
+  Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: tokenizers<0.19,>=0.14 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (0.15.2)
+Requirement already satisfied: safetensors>=0.4.1 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (0.4.2)
+Requirement already satisfied: tqdm>=4.27 in /home/darora_mn/.local/lib/python3.10/site-packages (from transformers>=4.20.0->-r requirements.txt (line 3)) (4.66.2)
+Collecting MarkupSafe>=2.0 (from jinja2->torch>=1.12.1->-r requirements.txt (line 2))
+  Using cached MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.0 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in /home/darora_mn/.local/lib/python3.10/site-packages (from requests->transformers>=4.20.0->-r requirements.txt (line 3)) (2.1.0)
+Collecting idna<4,>=2.5 (from requests->transformers>=4.20.0->-r requirements.txt (line 3))
+  Using cached idna-3.6-py3-none-any.whl.metadata (9.9 kB)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /home/darora_mn/miniconda3/envs/groqflow/lib/python3.10/site-packages (from requests->transformers>=4.20.0->-r requirements.txt (line 3)) (2.2.1)
+Collecting certifi>=2017.4.17 (from requests->transformers>=4.20.0->-r requirements.txt (line 3))
+  Using cached certifi-2024.2.2-py3-none-any.whl.metadata (2.2 kB)
+Requirement already satisfied: mpmath>=0.19 in /home/darora_mn/.local/lib/python3.10/site-packages (from sympy->torch>=1.12.1->-r requirements.txt (line 2)) (1.3.0)
+Using cached torch-2.2.2-cp310-cp310-manylinux1_x86_64.whl (755.5 MB)
+Using cached nvidia_nccl_cu12-2.19.3-py3-none-manylinux1_x86_64.whl (166.0 MB)
+Using cached triton-2.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (167.9 MB)
+Using cached Jinja2-3.1.3-py3-none-any.whl (133 kB)
+Using cached requests-2.31.0-py3-none-any.whl (62 kB)
+Using cached certifi-2024.2.2-py3-none-any.whl (163 kB)
+Using cached idna-3.6-py3-none-any.whl (61 kB)
+Using cached MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Installing collected packages: triton, nvidia-nccl-cu12, MarkupSafe, idna, certifi, requests, jinja2, torch
+  Attempting uninstall: triton
+    Found existing installation: triton 2.1.0
+    Uninstalling triton-2.1.0:
+      Successfully uninstalled triton-2.1.0
+  Attempting uninstall: nvidia-nccl-cu12
+    Found existing installation: nvidia-nccl-cu12 2.18.1
+    Uninstalling nvidia-nccl-cu12-2.18.1:
+      Successfully uninstalled nvidia-nccl-cu12-2.18.1
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+hummingbird-ml 0.4.4 requires psutil, which is not installed.
+torchaudio 2.2.1 requires torch==2.2.1, but you have torch 2.2.2 which is incompatible.
+torchvision 0.17.1 requires torch==2.2.1, but you have torch 2.2.2 which is incompatible.
+Successfully installed MarkupSafe-2.1.5 certifi-2024.2.2 idna-3.6 jinja2-3.1.3 nvidia-nccl-cu12-2.19.3 requests-2.31.0 torch-2.2.2 triton-2.2.0
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ python bert_tiny.py
+Traceback (most recent call last):
+  File "/home/darora_mn/groqflow/proof_points/natural_language_processing/bert/bert_tiny.py", line 11, in <module>
+    from groqflow import groqit
+ModuleNotFoundError: No module named 'groqflow'
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+export PYTHON_VERSION=3.10.12
+conda create -n groqflow python=$PYTHON_VERSION
+conda activate groqflow
+git clone https://github.com/groq/groqflow.git
+cd groqflow
+pip install --upgrade pip
+pip install -e .
+pushd . 
+cd demo_helpers
+pip install -e .
+popd
+qsub -I -l walltime=1:00:00
+-l ncpus=1 
+-l groq_accelerator=1
+git clone https://github.com/argonne-lcf/ai-science-training-series.git/
+cd groqflow/proof_points/natural_language_processing/bert
+pip install attr
+ 
+
+ERROR: Could not install packages due to an OSError: [Errno 13] Permission denied: 'REQUESTED'
+Consider using the `--user` option or check the permissions.
+
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$ python bert_tiny.py
+Traceback (most recent call last):
+  File "/home/darora_mn/groqflow/proof_points/natural_language_processing/bert/bert_tiny.py", line 9, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Error Output
+(base) darora_mn@groq-r01-gn-01:~/groqflow/demo_helpers$ pip install -e .
+Obtaining file:///home/darora_mn/groqflow/demo_helpers
+  Preparing metadata (setup.py) ... error
+  error: subprocess-exited-with-error
+  × python setup.py egg_info did not run successfully.
+  ? exit code: 1
+  ??> [11 lines of output]
+      Traceback (most recent call last):
+        File "<string>", line 2, in <module>
+        File "<pip-setuptools-caller>", line 14, in <module>
+        File "/opt/groq/runtime/site-packages/setuptools/__init__.py", line 16, in <module>
+          import setuptools.version
+        File "/opt/groq/runtime/site-packages/setuptools/version.py", line 1, in <module>
+          import pkg_resources
+        File "/opt/groq/runtime/site-packages/pkg_resources/__init__.py", line 2158, in <module>
+          register_finder(pkgutil.ImpImporter, find_on_path)
+                          ^^^^^^^^^^^^^^^^^^^
+      AttributeError: module 'pkgutil' has no attribute 'ImpImporter'. Did you mean: 'zipimporter'?
+      [end of output]
+
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+error: metadata-generation-failed
+
+× Encountered error while generating package metadata.
+??> See above for output.
+
+File "/home/darora_mn/.local/lib/python3.10/site-packages/aiohttp/helpers.py", line 229, in <module>
+    @attr.s(auto_attribs=True, frozen=True, slots=True)
+AttributeError: module 'attr' has no attribute 's'
+
+Traceback (most recent call last):
+  File "/home/darora_mn/groqflow/proof_points/natural_language_processing/bert/bert_tiny.py", line 13, in <module>
+    from demo_helpers.compute_performance import compute_performance
+  File "/home/darora_mn/groqflow/demo_helpers/demo_helpers/compute_performance.py", line 12, in <module>
+    from demo_helpers.dataset import Dataset, create_dataset
+  File "/home/darora_mn/groqflow/demo_helpers/demo_helpers/dataset.py", line 13, in <module>
+    from datasets import load_dataset
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/datasets/__init__.py", line 18, in <module>
+    from .arrow_dataset import Dataset
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/datasets/arrow_dataset.py", line 67, in <module>
+    from .arrow_reader import ArrowReader
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/datasets/arrow_reader.py", line 32, in <module>
+    from .download.download_config import DownloadConfig
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/datasets/download/__init__.py", line 10, in <module>
+    from .streaming_download_manager import StreamingDownloadManager
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/datasets/download/streaming_download_manager.py", line 18, in <module>
+    from aiohttp.client_exceptions import ClientError
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/aiohttp/__init__.py", line 6, in <module>
+    from .client import (
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/aiohttp/client.py", line 38, in <module>
+    from . import hdrs, http, payload
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/aiohttp/http.py", line 7, in <module>
+    from .http_parser import (
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/aiohttp/http_parser.py", line 30, in <module>
+    from .helpers import (
+  File "/home/darora_mn/.local/lib/python3.10/site-packages/aiohttp/helpers.py", line 229, in <module>
+    @attr.s(auto_attribs=True, frozen=True, slots=True)
+AttributeError: module 'attr' has no attribute 's'
+(groqflow) darora_mn@groq-r01-gn-08:~/groqflow/proof_points/natural_language_processing/bert$

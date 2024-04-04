@@ -1,0 +1,263 @@
+2024-04-03_DushyantHomework_Session#7 - Cerebras Ouput File
+ssh darora_mn@cerebras.ai.alcf.anl.gov
+ssh darora_mn@cer-login-02.ai.alcf.anl.gov
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 configs]$ cd ~/R_2.1.1/modelzoo/modelzoo/transformers/pytorch/bert
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$ source ~/R_2.1.1/venv_cerebras_pt/bin/activate
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$ export MODEL_DIR=model_dir_bert_large_pytorch
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$ if [ -d "$MODEL_DIR" ]; then rm -Rf $MODEL_DIR; fi
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$ python run.py CSX --job_labels name=bert_pt \
+> --params configs/bert_large_MSL128_sampleds.yaml \
+> --num_workers_per_csx=1 --mode train \
+> --model_dir $MODEL_DIR --mount_dirs /home/ /software/ \
+> --python_paths /home/darora_mn/R_2.1.1/modelzoo/ \
+> --compile_dir darora_mn |& tee mytest.log
+2024-04-03 21:38:19,715 INFO:   Effective batch size is 1024.
+2024-04-03 21:38:19,742 INFO:   Checkpoint autoloading is enabled. Looking for latest checkpoint in "model_dir_bert_large_pytorch" directory with the following naming convention: `checkpoint_(step)(_timestamp)?.mdl`.
+2024-04-03 21:38:19,743 INFO:   No checkpoints were found in "model_dir_bert_large_pytorch".
+2024-04-03 21:38:19,743 INFO:   No checkpoint was provided. Using randomly initialized model parameters.
+2024-04-03 21:38:21,040 INFO:   Saving checkpoint at step 0
+2024-04-03 21:38:48,536 INFO:   Saved checkpoint model_dir_bert_large_pytorch/checkpoint_0.mdl
+2024-04-03 21:39:04,035 INFO:   Compiling the model. This may take a few minutes.
+2024-04-03 21:39:04,036 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-03 21:39:05,549 INFO:   Initiating a new image build job against the cluster server.
+2024-04-03 21:39:05,653 INFO:   Custom worker image build is disabled from server.
+2024-04-03 21:39:05,659 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-03 21:39:05,969 INFO:   Initiating a new compile wsjob against the cluster server.
+2024-04-03 21:39:06,079 INFO:   compile job id: wsjob-dq8snndeg8xwuxzvkaz368, remote log path: /n1/wsjob/workdir/job-operator/wsjob-dq8snndeg8xwuxzvkaz368
+2024-04-03 21:39:16,120 INFO:   Poll ingress status: Waiting for job service readiness.
+2024-04-03 21:39:46,136 INFO:   Poll ingress status: Waiting for job ingress readiness.
+2024-04-03 21:39:56,151 INFO:   Ingress is ready: Job ingress ready, poll ingress success.
+2024-04-03 21:40:00,358 INFO:   Compile artifacts successfully written to remote compile directory. Compile hash is: cs_9465229803081323743
+2024-04-03 21:40:00,364 INFO:   Heartbeat thread stopped for wsjob-dq8snndeg8xwuxzvkaz368.
+2024-04-03 21:40:00,367 INFO:   Compile was successful!
+2024-04-03 21:40:00,371 INFO:   Programming Cerebras Wafer Scale Cluster for execution. This may take a few minutes.
+2024-04-03 21:40:02,584 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-03 21:40:02,915 INFO:   Initiating a new execute wsjob against the cluster server.
+2024-04-03 21:40:03,040 INFO:   execute job id: wsjob-hzyyn3jvbbzbskpmy984p5, remote log path: /n1/wsjob/workdir/job-operator/wsjob-hzyyn3jvbbzbskpmy984p5
+2024-04-03 21:40:13,081 INFO:   Poll ingress status: Waiting for job running, current job status: Scheduled, msg: job is scheduled.
+2024-04-03 21:40:23,065 INFO:   Poll ingress status: Waiting for job service readiness.
+2024-04-03 21:40:43,107 INFO:   Poll ingress status: Waiting for job ingress readiness.
+2024-04-03 21:40:53,128 INFO:   Ingress is ready: Job ingress ready, poll ingress success.
+2024-04-03 21:40:53,292 INFO:   Preparing to execute using 1 CSX
+2024-04-03 21:41:22,178 INFO:   About to send initial weights
+2024-04-03 21:41:56,304 INFO:   Finished sending initial weights
+2024-04-03 21:41:56,307 INFO:   Finalizing appliance staging for the run
+2024-04-03 21:41:56,343 INFO:   Waiting for device programming to complete
+2024-04-03 21:43:51,167 INFO:   Device programming is complete
+2024-04-03 21:43:52,054 INFO:   Using network type: ROCE
+2024-04-03 21:43:52,055 INFO:   Waiting for input workers to prime the data pipeline and begin streaming ...
+2024-04-03 21:43:52,093 INFO:   Input workers have begun streaming input data
+2024-04-03 21:44:09,028 INFO:   Appliance staging is complete
+2024-04-03 21:44:09,034 INFO:   Beginning appliance run
+2024-04-03 21:44:29,724 INFO:   | Train Device=CSX, Step=100, Loss=9.48438, Rate=4967.52 samples/sec, GlobalRate=4967.52 samples/sec
+2024-04-03 21:44:50,571 INFO:   | Train Device=CSX, Step=200, Loss=8.35938, Rate=4934.18 samples/sec, GlobalRate=4939.58 samples/sec
+2024-04-03 21:45:11,497 INFO:   | Train Device=CSX, Step=300, Loss=7.91406, Rate=4909.71 samples/sec, GlobalRate=4924.09 samples/sec
+2024-04-03 21:45:32,593 INFO:   | Train Device=CSX, Step=400, Loss=7.54688, Rate=4876.33 samples/sec, GlobalRate=4906.40 samples/sec
+2024-04-03 21:45:53,559 INFO:   | Train Device=CSX, Step=500, Loss=7.46875, Rate=4881.06 samples/sec, GlobalRate=4901.94 samples/sec
+2024-04-03 21:46:14,751 INFO:   | Train Device=CSX, Step=600, Loss=7.39844, Rate=4851.57 samples/sec, GlobalRate=4890.13 samples/sec
+2024-04-03 21:46:35,739 INFO:   | Train Device=CSX, Step=700, Loss=7.35156, Rate=4868.04 samples/sec, GlobalRate=4888.54 samples/sec
+2024-04-03 21:46:56,845 INFO:   | Train Device=CSX, Step=800, Loss=7.25000, Rate=4858.16 samples/sec, GlobalRate=4883.89 samples/sec
+2024-04-03 21:47:18,027 INFO:   | Train Device=CSX, Step=900, Loss=7.21094, Rate=4843.90 samples/sec, GlobalRate=4878.34 samples/sec
+2024-04-03 21:47:38,890 INFO:   | Train Device=CSX, Step=1000, Loss=7.07812, Rate=4882.53 samples/sec, GlobalRate=4881.32 samples/sec
+2024-04-03 21:47:38,890 INFO:   Saving checkpoint at step 1000
+2024-04-03 21:48:14,130 INFO:   Saved checkpoint model_dir_bert_large_pytorch/checkpoint_1000.mdl
+2024-04-03 21:49:00,796 INFO:   Heartbeat thread stopped for wsjob-hzyyn3jvbbzbskpmy984p5.
+2024-04-03 21:49:00,803 INFO:   Training completed successfully!
+2024-04-03 21:49:00,804 INFO:   Processed 1024000 sample(s) in 209.779443834 seconds.
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$ python run.py CSX --job_labels name=bert_pt \
+> --params configs/bert_large_MSL128_sampleds.yaml \
+> --num_workers_per_csx=1 --mode train \
+> --model_dir $MODEL_DIR --mount_dirs /home/ /software/ \
+> --python_paths /home/darora_mn/R_2.1.1/modelzoo/ \
+> --compile_dir darora_mn |& tee mytest.log
+2024-04-03 21:53:04,875 INFO:   Effective batch size is 512.
+2024-04-03 21:53:04,899 INFO:   Checkpoint autoloading is enabled. Looking for latest checkpoint in "model_dir_bert_large_pytorch" directory with the following naming convention: `checkpoint_(step)(_timestamp)?.mdl`.
+2024-04-03 21:53:04,900 INFO:   No checkpoints were found in "model_dir_bert_large_pytorch".
+2024-04-03 21:53:04,900 INFO:   No checkpoint was provided. Using randomly initialized model parameters.
+2024-04-03 21:53:06,155 INFO:   Saving checkpoint at step 0
+2024-04-03 21:53:34,106 INFO:   Saved checkpoint model_dir_bert_large_pytorch/checkpoint_0.mdl
+2024-04-03 21:53:48,045 INFO:   Compiling the model. This may take a few minutes.
+2024-04-03 21:53:48,046 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-03 21:53:49,258 INFO:   Initiating a new image build job against the cluster server.
+2024-04-03 21:53:49,359 INFO:   Custom worker image build is disabled from server.
+2024-04-03 21:53:49,365 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-03 21:53:49,666 INFO:   Initiating a new compile wsjob against the cluster server.
+2024-04-03 21:53:49,773 INFO:   compile job id: wsjob-ujytuhxzy58pnojqzbu3yh, remote log path: /n1/wsjob/workdir/job-operator/wsjob-ujytuhxzy58pnojqzbu3yh
+2024-04-03 21:53:59,812 INFO:   Poll ingress status: Waiting for job service readiness.
+2024-04-03 21:54:29,822 INFO:   Poll ingress status: Waiting for job ingress readiness.
+2024-04-03 21:54:49,844 INFO:   Ingress is ready: Job ingress ready, poll ingress success.
+2024-04-03 21:54:54,270 INFO:   Pre-optimization transforms...
+2024-04-03 21:54:59,342 INFO:   Optimizing layouts and memory usage...
+2024-04-03 21:54:59,386 INFO:   Gradient accumulation enabled
+2024-04-03 21:54:59,387 WARNING:   Gradient accumulation will search for an optimal micro batch size based on internal performance models, which can lead to an increased compile time. Specify `micro_batch_size` option in the 'train_input/eval_input' section of your .yaml parameter file to set the gradient accumulation microbatch size, if an optimal microbatch size is known.
+
+2024-04-03 21:54:59,390 INFO:   Gradient accumulation trying sub-batch size 8...
+2024-04-03 21:55:04,834 INFO:   Exploring floorplans
+2024-04-03 21:55:11,664 INFO:   Exploring data layouts
+2024-04-03 21:55:23,899 INFO:   Optimizing memory usage
+2024-04-03 21:56:14,563 INFO:   Gradient accumulation trying sub-batch size 64...
+2024-04-03 21:56:20,074 INFO:   Exploring floorplans
+2024-04-03 21:56:29,114 INFO:   Exploring data layouts
+2024-04-03 21:56:48,719 INFO:   Optimizing memory usage
+2024-04-03 21:57:23,043 INFO:   Gradient accumulation trying sub-batch size 32...
+2024-04-03 21:57:29,931 INFO:   Exploring floorplans
+2024-04-03 21:57:37,717 INFO:   Exploring data layouts
+2024-04-03 21:57:53,769 INFO:   Optimizing memory usage
+2024-04-03 21:58:25,915 INFO:   Gradient accumulation trying sub-batch size 128...
+2024-04-03 21:58:31,544 INFO:   Exploring floorplans
+2024-04-03 21:58:41,266 INFO:   Exploring data layouts
+2024-04-03 21:59:01,698 INFO:   Optimizing memory usage
+2024-04-03 21:59:30,807 INFO:   Gradient accumulation trying sub-batch size 256...
+2024-04-03 21:59:36,511 INFO:   Exploring floorplans
+2024-04-03 21:59:51,930 INFO:   Exploring data layouts
+2024-04-03 22:00:14,734 INFO:   Optimizing memory usage
+2024-04-03 22:00:58,215 INFO:   Exploring floorplans
+2024-04-03 22:01:03,258 INFO:   Exploring data layouts
+2024-04-03 22:01:37,562 INFO:   Optimizing memory usage
+2024-04-03 22:02:11,561 INFO:   No benefit from gradient accumulation expected. Compile will proceed at original per-box batch size 512 with 6 lanes
+
+2024-04-03 22:02:11,615 INFO:   Post-layout optimizations...
+2024-04-03 22:02:24,005 INFO:   Allocating buffers...
+2024-04-03 22:02:27,109 INFO:   Code generation...
+2024-04-03 22:02:40,531 INFO:   Compiling image...
+2024-04-03 22:02:40,536 INFO:   Compiling kernels
+2024-04-03 22:06:01,873 INFO:   Compiling final image
+2024-04-03 22:08:52,140 INFO:   Compile artifacts successfully written to remote compile directory. Compile hash is: cs_8939750200954608837
+2024-04-03 22:08:52,197 INFO:   Heartbeat thread stopped for wsjob-ujytuhxzy58pnojqzbu3yh.
+2024-04-03 22:08:52,200 INFO:   Compile was successful!
+2024-04-03 22:08:52,206 INFO:   Programming Cerebras Wafer Scale Cluster for execution. This may take a few minutes.
+2024-04-03 22:08:54,580 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-03 22:08:54,898 INFO:   Initiating a new execute wsjob against the cluster server.
+2024-04-03 22:08:55,020 INFO:   execute job id: wsjob-f3bubnbqug3wetr45cfkzh, remote log path: /n1/wsjob/workdir/job-operator/wsjob-f3bubnbqug3wetr45cfkzh
+2024-04-03 22:09:05,059 INFO:   Poll ingress status: Waiting for job running, current job status: Queueing, msg: job is queueing. Job queue status: current job is top of queue but likely blocked by running jobs, 1 execute job(s) running using 1 system(s), 1 compile job(s) running using 67Gi memory. For more information, please run 'csctl get jobs'.
+2024-04-03 22:09:15,054 INFO:   Poll ingress status: Waiting for job running, current job status: Scheduled, msg: job is scheduled.
+2024-04-03 22:09:25,074 INFO:   Poll ingress status: Waiting for job service readiness.
+2024-04-03 22:09:45,117 INFO:   Poll ingress status: Waiting for job ingress readiness.
+2024-04-03 22:09:55,136 INFO:   Ingress is ready: Job ingress ready, poll ingress success.
+2024-04-03 22:09:55,286 INFO:   Preparing to execute using 1 CSX
+2024-04-03 22:10:25,123 INFO:   About to send initial weights
+2024-04-03 22:11:01,014 INFO:   Finished sending initial weights
+2024-04-03 22:11:01,017 INFO:   Finalizing appliance staging for the run
+2024-04-03 22:11:01,035 INFO:   Waiting for device programming to complete
+2024-04-03 22:12:55,747 INFO:   Device programming is complete
+2024-04-03 22:12:56,496 INFO:   Using network type: ROCE
+2024-04-03 22:12:56,497 INFO:   Waiting for input workers to prime the data pipeline and begin streaming ...
+2024-04-03 22:12:56,521 INFO:   Input workers have begun streaming input data
+2024-04-03 22:13:13,211 INFO:   Appliance staging is complete
+2024-04-03 22:13:13,216 INFO:   Beginning appliance run
+2024-04-03 22:13:30,454 INFO:   | Train Device=CSX, Step=100, Loss=9.39062, Rate=2982.64 samples/sec, GlobalRate=2982.64 samples/sec
+2024-04-03 22:13:48,040 INFO:   | Train Device=CSX, Step=200, Loss=8.70312, Rate=2939.90 samples/sec, GlobalRate=2946.60 samples/sec
+2024-04-03 22:14:05,398 INFO:   | Train Device=CSX, Step=300, Loss=7.79688, Rate=2945.74 samples/sec, GlobalRate=2947.61 samples/sec
+2024-04-03 22:14:22,962 INFO:   | Train Device=CSX, Step=400, Loss=7.39062, Rate=2927.33 samples/sec, GlobalRate=2939.40 samples/sec
+2024-04-03 22:14:40,634 INFO:   | Train Device=CSX, Step=500, Loss=7.80469, Rate=2909.29 samples/sec, GlobalRate=2930.88 samples/sec
+2024-04-03 22:14:58,304 INFO:   | Train Device=CSX, Step=600, Loss=7.48438, Rate=2902.23 samples/sec, GlobalRate=2925.27 samples/sec
+2024-04-03 22:15:15,768 INFO:   | Train Device=CSX, Step=700, Loss=7.33594, Rate=2919.92 samples/sec, GlobalRate=2926.18 samples/sec
+2024-04-03 22:15:33,474 INFO:   | Train Device=CSX, Step=800, Loss=7.24219, Rate=2903.01 samples/sec, GlobalRate=2921.83 samples/sec
+2024-04-03 22:15:50,943 INFO:   | Train Device=CSX, Step=900, Loss=7.35156, Rate=2919.71 samples/sec, GlobalRate=2922.83 samples/sec
+2024-04-03 22:16:08,459 INFO:   | Train Device=CSX, Step=1000, Loss=7.12500, Rate=2921.70 samples/sec, GlobalRate=2922.85 samples/sec
+2024-04-03 22:16:08,460 INFO:   Saving checkpoint at step 1000
+2024-04-03 22:16:45,143 INFO:   Saved checkpoint model_dir_bert_large_pytorch/checkpoint_1000.mdl
+2024-04-03 22:17:20,931 INFO:   Heartbeat thread stopped for wsjob-f3bubnbqug3wetr45cfkzh.
+2024-04-03 22:17:20,939 INFO:   Training completed successfully!
+2024-04-03 22:17:20,939 INFO:   Processed 512000 sample(s) in 175.171348919 seconds.
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$ python run.py CSX --job_labels name=bert_pt \
+> --params configs/bert_large_MSL128_sampleds.yaml \
+> --num_workers_per_csx=1 --mode train \
+> --model_dir $MODEL_DIR --mount_dirs /home/ /software/ \
+> --python_paths /home/darora_mn/R_2.1.1/modelzoo/ \
+> --compile_dir darora_mn |& tee mytest.log
+2024-04-04 01:02:57,517 INFO:   Effective batch size is 2048.
+2024-04-04 01:02:57,543 INFO:   Checkpoint autoloading is enabled. Looking for latest checkpoint in "model_dir_bert_large_pytorch" directory with the following naming convention: `checkpoint_(step)(_timestamp)?.mdl`.
+2024-04-04 01:02:57,545 INFO:   No checkpoints were found in "model_dir_bert_large_pytorch".
+2024-04-04 01:02:57,545 INFO:   No checkpoint was provided. Using randomly initialized model parameters.
+2024-04-04 01:02:58,860 INFO:   Saving checkpoint at step 0
+2024-04-04 01:03:26,274 INFO:   Saved checkpoint model_dir_bert_large_pytorch/checkpoint_0.mdl
+2024-04-04 01:03:41,991 INFO:   Compiling the model. This may take a few minutes.
+2024-04-04 01:03:41,993 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-04 01:03:43,335 INFO:   Initiating a new image build job against the cluster server.
+2024-04-04 01:03:43,444 INFO:   Custom worker image build is disabled from server.
+2024-04-04 01:03:43,450 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-04 01:03:43,780 INFO:   Initiating a new compile wsjob against the cluster server.
+2024-04-04 01:03:43,900 INFO:   compile job id: wsjob-ccndk8rcht7pqnxodyszjd, remote log path: /n1/wsjob/workdir/job-operator/wsjob-ccndk8rcht7pqnxodyszjd
+2024-04-04 01:03:53,943 INFO:   Poll ingress status: Waiting for job service readiness.
+2024-04-04 01:04:23,950 INFO:   Ingress is ready: Job ingress ready, poll ingress success.
+2024-04-04 01:04:28,483 INFO:   Pre-optimization transforms...
+2024-04-04 01:04:34,207 INFO:   Optimizing layouts and memory usage...
+2024-04-04 01:04:34,314 INFO:   Gradient accumulation enabled
+2024-04-04 01:04:34,315 WARNING:   Gradient accumulation will search for an optimal micro batch size based on internal performance models, which can lead to an increased compile time. Specify `micro_batch_size` option in the 'train_input/eval_input' section of your .yaml parameter file to set the gradient accumulation microbatch size, if an optimal microbatch size is known.
+
+2024-04-04 01:04:34,318 INFO:   Gradient accumulation trying sub-batch size 8...
+2024-04-04 01:04:39,924 INFO:   Exploring floorplans
+2024-04-04 01:04:46,895 INFO:   Exploring data layouts
+2024-04-04 01:04:59,028 INFO:   Optimizing memory usage
+2024-04-04 01:05:48,912 INFO:   Gradient accumulation trying sub-batch size 256...
+2024-04-04 01:05:55,065 INFO:   Exploring floorplans
+2024-04-04 01:06:12,648 INFO:   Exploring data layouts
+2024-04-04 01:06:39,270 INFO:   Optimizing memory usage
+2024-04-04 01:07:13,894 INFO:   Gradient accumulation trying sub-batch size 32...
+2024-04-04 01:07:20,478 INFO:   Exploring floorplans
+2024-04-04 01:07:28,439 INFO:   Exploring data layouts
+2024-04-04 01:07:44,578 INFO:   Optimizing memory usage
+2024-04-04 01:08:19,737 INFO:   Gradient accumulation trying sub-batch size 512...
+2024-04-04 01:08:25,686 INFO:   Exploring floorplans
+2024-04-04 01:08:29,106 INFO:   Exploring data layouts
+2024-04-04 01:09:01,546 INFO:   Optimizing memory usage
+2024-04-04 01:09:34,164 INFO:   Gradient accumulation trying sub-batch size 128...
+2024-04-04 01:09:39,610 INFO:   Exploring floorplans
+2024-04-04 01:09:49,868 INFO:   Exploring data layouts
+2024-04-04 01:10:09,633 INFO:   Optimizing memory usage
+2024-04-04 01:10:37,594 INFO:   Gradient accumulation trying sub-batch size 1024...
+2024-04-04 01:10:43,332 INFO:   Exploring floorplans
+2024-04-04 01:10:45,149 INFO:   Exploring data layouts
+2024-04-04 01:11:17,636 INFO:   Optimizing memory usage
+2024-04-04 01:11:45,667 INFO:   Exploring floorplans
+2024-04-04 01:11:47,580 INFO:   Exploring data layouts
+2024-04-04 01:12:23,449 INFO:   Optimizing memory usage
+2024-04-04 01:13:14,702 INFO:   No benefit from gradient accumulation expected. Compile will proceed at original per-box batch size 2048 with 11 lanes
+
+2024-04-04 01:13:14,742 INFO:   Post-layout optimizations...
+2024-04-04 01:13:23,482 INFO:   Allocating buffers...
+2024-04-04 01:13:26,287 INFO:   Code generation...
+2024-04-04 01:13:42,226 INFO:   Compiling image...
+2024-04-04 01:13:42,231 INFO:   Compiling kernels
+2024-04-04 01:15:38,862 INFO:   Compiling final image
+2024-04-04 01:17:57,845 INFO:   Compile artifacts successfully written to remote compile directory. Compile hash is: cs_12842439843636108263
+2024-04-04 01:17:57,911 INFO:   Heartbeat thread stopped for wsjob-ccndk8rcht7pqnxodyszjd.
+2024-04-04 01:17:57,913 INFO:   Compile was successful!
+2024-04-04 01:17:57,919 INFO:   Programming Cerebras Wafer Scale Cluster for execution. This may take a few minutes.
+2024-04-04 01:18:00,252 INFO:   Defaulted to use the job-operator namespace as the usernode config /opt/cerebras/config_v2 only has access to that namespace.
+2024-04-04 01:18:00,603 INFO:   Initiating a new execute wsjob against the cluster server.
+2024-04-04 01:18:00,733 INFO:   execute job id: wsjob-twhf7w24caeoirtvutv2nt, remote log path: /n1/wsjob/workdir/job-operator/wsjob-twhf7w24caeoirtvutv2nt
+2024-04-04 01:18:10,777 INFO:   Poll ingress status: Waiting for job running, current job status: Queueing, msg: job is queueing. Job queue status: current job is top of queue but likely blocked by running jobs, 1 execute job(s) running using 1 system(s), 1 compile job(s) running using 67Gi memory. For more information, please run 'csctl get jobs'.
+2024-04-04 01:18:20,752 INFO:   Poll ingress status: Waiting for job running, current job status: Scheduled, msg: job is scheduled.
+2024-04-04 01:18:30,771 INFO:   Poll ingress status: Waiting for job service readiness.
+2024-04-04 01:18:50,810 INFO:   Ingress is ready: Job ingress ready, poll ingress success.
+2024-04-04 01:18:50,965 INFO:   Preparing to execute using 1 CSX
+2024-04-04 01:19:20,172 INFO:   About to send initial weights
+2024-04-04 01:19:54,275 INFO:   Finished sending initial weights
+2024-04-04 01:19:54,277 INFO:   Finalizing appliance staging for the run
+2024-04-04 01:19:54,329 INFO:   Waiting for device programming to complete
+2024-04-04 01:21:48,745 INFO:   Device programming is complete
+2024-04-04 01:21:49,695 INFO:   Using network type: ROCE
+2024-04-04 01:21:49,696 INFO:   Waiting for input workers to prime the data pipeline and begin streaming ...
+2024-04-04 01:21:49,745 INFO:   Input workers have begun streaming input data
+2024-04-04 01:22:06,662 INFO:   Appliance staging is complete
+2024-04-04 01:22:06,666 INFO:   Beginning appliance run
+2024-04-04 01:22:36,609 INFO:   | Train Device=CSX, Step=100, Loss=9.48438, Rate=6856.02 samples/sec, GlobalRate=6856.03 samples/sec
+2024-04-04 01:23:07,048 INFO:   | Train Device=CSX, Step=200, Loss=8.48438, Rate=6779.32 samples/sec, GlobalRate=6791.50 samples/sec
+2024-04-04 01:23:37,468 INFO:   | Train Device=CSX, Step=300, Loss=7.77344, Rate=6751.13 samples/sec, GlobalRate=6771.67 samples/sec
+2024-04-04 01:24:07,672 INFO:   | Train Device=CSX, Step=400, Loss=7.64062, Rate=6768.75 samples/sec, GlobalRate=6773.87 samples/sec
+2024-04-04 01:24:37,914 INFO:   | Train Device=CSX, Step=500, Loss=7.37500, Rate=6770.73 samples/sec, GlobalRate=6773.51 samples/sec
+2024-04-04 01:25:08,295 INFO:   | Train Device=CSX, Step=600, Loss=7.42188, Rate=6752.97 samples/sec, GlobalRate=6768.09 samples/sec
+2024-04-04 01:25:38,655 INFO:   | Train Device=CSX, Step=700, Loss=7.25000, Rate=6748.59 samples/sec, GlobalRate=6764.88 samples/sec
+2024-04-04 01:26:09,010 INFO:   | Train Device=CSX, Step=800, Loss=7.12500, Rate=6747.53 samples/sec, GlobalRate=6762.62 samples/sec
+2024-04-04 01:26:39,420 INFO:   | Train Device=CSX, Step=900, Loss=7.25000, Rate=6739.81 samples/sec, GlobalRate=6759.50 samples/sec
+2024-04-04 01:27:09,797 INFO:   | Train Device=CSX, Step=1000, Loss=7.14844, Rate=6741.03 samples/sec, GlobalRate=6757.73 samples/sec
+2024-04-04 01:27:09,798 INFO:   Saving checkpoint at step 1000
+2024-04-04 01:27:45,192 INFO:   Saved checkpoint model_dir_bert_large_pytorch/checkpoint_1000.mdl
+2024-04-04 01:28:41,861 INFO:   Heartbeat thread stopped for wsjob-twhf7w24caeoirtvutv2nt.
+2024-04-04 01:28:41,868 INFO:   Training completed successfully!
+2024-04-04 01:28:41,868 INFO:   Processed 2048000 sample(s) in 303.060357193 seconds.
+(venv_cerebras_pt) (base) [darora_mn@cer-login-02 bert]$

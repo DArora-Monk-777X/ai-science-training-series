@@ -1,0 +1,53 @@
+2024-03-31_DushyantHomework_Session#7 - Graphcore Output File
+ssh darora_mn@gc-login-02.ai.alcf.anl.gov
+Output Files: Successfully ran MNIST example with Accuracy on test set: 98.15%. Please see below. Revised parameters again to run but ran into another user blocking the job run. 
+(poptorch33_env) darora_mn@gc-poplar-03:~/graphcore/examples/tutorials/simple_applications/pytorch/mnist$ /opt/slurm/bin/srun --ipus=1 python mnist_poptorch.py
+srun: job 20348 queued and waiting for resources
+srun: job 20348 has been allocated resources
+100%|??????????| 9912422/9912422 [00:00<00:00, 444241903.28it/s]
+100%|??????????| 28881/28881 [00:00<00:00, 207069562.09it/s]
+100%|??????????| 1648877/1648877 [00:00<00:00, 113785643.25it/s]
+100%|??????????| 4542/4542 [00:00<00:00, 41414192.97it/s]
+Epochs:   0%|          | 0/10 [00:00<?,[23:01:19.563] [poptorch:cpp] [warning] [DISPATCHER] Type coerced from Long to Int for tensor id 10/150 [00:00<?, ?it/s]
+                                                       2024-03-23T23:01:20.028884Z PL:POPLIN    2051506.2051506 W: poplin::preplanConvolution() is deprecated! Use poplin::preplan() instead
+Graph compilation:   3%|?         | 3/100 [00:00<00:03]2024-03-23T23:01:23.478797Z PL:POPLIN    2051506.2051506 W: poplin::preplanMatMuls() is deprecated! Use poplin::preplan() instead
+Graph compilation: 100%|??????????| 100/100 [00:22<00:00]2024-03-23T23:01:42.425280Z popart:session 2051506.2051506 W: Rng state buffer was not serialized.You did not load poplar Engine.Remember that if you would like to run the model using the model runtime then you have to create your own buffer and callback in your model runtime application for rngStateTensor.
+
+Epochs: 100%|??????????| 10/10 [01:49<00:00, 10.98s/it]
+  0%|          | 0/125 [00:00<?, ?it/s]                2024-03-23T23:03:09.715756Z PL:POPLIN    2051506.2051506 W: poplin::preplanConvolution() is deprecated! Use poplin::preplan() instead
+                                                       2024-03-23T23:03:11.933503Z PL:POPLIN    2051506.2051506 W: poplin::preplanMatMuls() is deprecated! Use poplin::preplan() instead
+Graph compilation: 100%|??????????| 100/100 [00:14<00:00]
+ 95%|???????Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw/train-images-idx3-ubyte.gz
+Extracting /home/darora_mn/.torch/datasets/MNIST/raw/train-images-idx3-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw/train-labels-idx1-ubyte.gz
+Extracting /home/darora_mn/.torch/datasets/MNIST/raw/train-labels-idx1-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw/t10k-images-idx3-ubyte.gz
+Extracting /home/darora_mn/.torch/datasets/MNIST/raw/t10k-images-idx3-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw/t10k-labels-idx1-ubyte.gz
+Extracting /home/darora_mn/.torch/datasets/MNIST/raw/t10k-labels-idx1-ubyte.gz to /home/darora_mn/.torch/datasets/MNIST/raw
+TrainingModelWithLoss(
+  (model): Network(
+    (layer1): Block(
+      (conv): Conv2d(1, 32, kernel_size=(3, 3), stride=(1, 1))
+      (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (relu): ReLU()
+    )
+    (layer2): Block(
+      (conv): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1))
+      (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (relu): ReLU()
+    )
+    (layer3): Linear(in_features=1600, out_features=128, bias=True)
+    (layer3_act): ReLU()
+    (layer3_dropout): Dropout(p=0.5, inplace=False)
+    (layer4): Linear(in_features=128, out_features=10, bias=True)
+    (softmax): Softmax(dim=1)
+  )
+  (loss): CrossEntropyLoss()
+)
+Accuracy on test set: 98.15%
+(poptorch33_env) darora_mn@gc-poplar-03:~/graphcore/examples/tutorials/simple_applications/pytorch/mnist$
